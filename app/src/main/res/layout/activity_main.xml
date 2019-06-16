@@ -11,7 +11,7 @@
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/musicalNote"
+            app:srcCompat="@drawable/musical_note"
             android:id="@+id/image"/>
 
     <SeekBar android:layout_width="300dp"
@@ -52,7 +52,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:id="@+id/playButton"
-                android:background="@drawable/arrow"/>
+                android:background="@drawable/play"/>
 
         <Button
                 android:layout_width="50dp"
@@ -67,7 +67,7 @@
     <SeekBar android:layout_width="300dp"
              android:layout_height="wrap_content"
              android:layout_marginTop="30dp"
-             android:id="@+id/loudnessBar"/>
+             android:id="@+id/loudnessBar" android:progress="50"/>
 
     <LinearLayout
             android:layout_width="wrap_content"
