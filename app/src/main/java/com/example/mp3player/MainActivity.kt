@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             //asking for permission
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),0)
         }else{
-            createPlayer()
+            createSongList()
         }
 
 
@@ -115,13 +115,13 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            createPlayer()
+            createSongList()
         } else {
             longToast("Permission not granted")
         }
     }
 
-    private fun createPlayer(){
+    private fun createSongList(){
         val songFinder = MusicFinder(contentResolver)
         songFinder.prepare()
         songs = songFinder.allSongs
@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
             progressBar.progress = currentPosition
 
             val elapsedTime = createTimeLabel(currentPosition)
-            currentTime.text = elapsedTime //TODO
+            currentTime.text = elapsedTime
 
             val remainingTimeValue = createTimeLabel(totalTime - currentPosition)
             remainingTime.text = remainingTimeValue
@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun createTimeLabel(time: Int):String{
-        var timeLabel = ""
+        var timeLabel: String
         val min = time /1000/60
         val sec = time /1000 %60
 
@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeMusic( id:Int, firstTime:Boolean=false){Log.d("CUSTOM", "!!!")
         if (!songs.isEmpty()) {
-            Log.d("CUSTOM", "change music to id: ${id}")
+            Log.d("CUSTOM", "change music to id: $id")
             val song = songs[id]
 
             if(!firstTime)
@@ -189,11 +189,8 @@ class MainActivity : AppCompatActivity() {
             progressBar.max = totalTime
 
             Log.d("CUSTOM", "wait for image load"+song.albumArt.toString())
-
-            Log.d("CUSTOM", "walid url")
             try {
                 val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, song.albumArt)
-                //albumArt.imageURI = song.albumArt
                 albumArt.setImageBitmap(Bitmap.createScaledBitmap(bitmap,250,250,false))
 
             } catch (e: FileNotFoundException) {
